@@ -46,6 +46,7 @@ public class Cart {
 
     public void clearCart(){
         //清空map
+
         map.clear();
         //总计设置为0
         total = 0d;
