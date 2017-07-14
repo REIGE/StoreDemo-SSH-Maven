@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+
+
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- 引入外部jdbc.properties文件 -->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+
+    <!--配置连接池的信息-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${jdbc.driver}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.user}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <!--配置Hibernate的相关属性-->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <!--注入连接池-->
+        <property name="dataSource" ref="dataSource"/>
+        <property name="hibernateProperties">
+            <props>
+                <!--hibernate 方言-->
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.connection.useUnicode">true</prop>
+                <prop key="connection.characterEncoding">UTF_8</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.use_sql_comments">false</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.connection.autocommit">false</prop>
+            </props>
+        </property>
+        <!--配置映射文件-->
+        <property name="mappingResources">
+            <list>
+                <value>com/reige/store/user/User.hbm.xml</value>
+                <value>com/reige/store/product/Product.hbm.xml</value>
+                <value>com/reige/store/category/Category.hbm.xml</value>
+                <value>com/reige/store/categorysecond/CategorySecond_hbm.xml</value>
+            </list>
+        </property>
+    </bean>
+    <!--声明式事务管理-->
+    <!--配置事务管理器-->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <!--注入sessionFactory-->
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!--配置action-->
+    <bean id="indexAction" class="com.reige.store.index.IndexAction" scope="prototype">
+        <property name="productService" ref="productService"/>
+        <property name="categoryService" ref="categoryService"/>
+    </bean>
+
+    <bean id="userAction" class="com.reige.store.user.UserAction" scope="prototype">
+        <property name="userService" ref="userService"/>
+    </bean>
+
+    <bean id="productAction" class="com.reige.store.product.ProductAction" scope="prototype">
+        <property name="productService" ref="productService"/>
+        <property name="categoryService" ref="categoryService"/>
+    </bean>
+    <bean id="cartAction" class="com.reige.store.cart.CartAction" scope="prototype">
+        <property name="productService" ref="productService"/>
+    </bean>
+
+    <!--验证码Action-->
+    <bean id="checkImgAction" class="com.reige.store.utils.CheckImgAction" scope="prototype"/>
+
+
+    <!--配置Service-->
+    <bean id="userService" class="com.reige.store.user.UserService">
+        <property name="userDao" ref="userDao"/>
+    </bean>
+    <bean id="productService" class="com.reige.store.product.ProductService">
+        <property name="productDao" ref="productDao"/>
+    </bean>
+    <bean id="categoryService" class="com.reige.store.category.CategoryService">
+        <property name="categoryDao" ref="categoryDao"/>
+    </bean>
+
+    <!--配置dao-->
+    <!--用户-->
+    <bean id="userDao" class="com.reige.store.user.UserDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <!--商品-->
+    <bean id="productDao" class="com.reige.store.product.ProductDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <!--一级分类-->
+    <bean id="categoryDao" class="com.reige.store.category.CategoryDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <!--二级分类-->
+    <bean id="categorySecondDao" class="com.reige.store.categorysecond.CategorySecondDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+</beans>
