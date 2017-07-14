@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+		 pageEncoding="UTF-8" %>
+<%@ taglib uri="/struts-tags" prefix="s" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0043)http://localhost:8080/mango/cart/list.jhtml -->
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -5,10 +8,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
 <title>订单页面</title>
-<link href="../css/common.css" rel="stylesheet" type="text/css"/>
-<link href="../css/cart.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="../js/jquery.js"></script>
-<script type="text/javascript" src="../js/common.js"></script>
+<link href="${pageContext.request.contextPath}/css/common.css" rel="stylesheet" type="text/css"/>
+<link href="${pageContext.request.contextPath}/css/cart.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/common.js"></script>
 <script type="text/javascript">
 	
 </script>
@@ -19,13 +22,13 @@
 	<div class="span5">
 		<div class="logo">
 			<a href="http://localhost:8080/mango/">
-				<img src="../image/logo.gif" alt="Mango商城"/>
+				<img src="${pageContext.request.contextPath}/image/logo.gif" alt="Mango商城"/>
 			</a>
 		</div>
 	</div>
 	<div class="span9">
 <div class="headerAd">
-	<img src="../image/header.jpg" width="320" height="50" alt="正品保障" title="正品保障"/>
+	<img src="${pageContext.request.contextPath}/image/header.jpg" width="320" height="50" alt="正品保障" title="正品保障"/>
 </div>	
 </div>
 	<div class="span10 last">
@@ -179,28 +182,28 @@
 						<p>
 							选择银行：<br/>
 							<input type="radio" name="pd_FrpId" value="ICBC-NET-B2C" checked="checked"/>工商银行
-							<img src="../bank_img/icbc.bmp" align="middle"/>&nbsp;&nbsp;&nbsp;&nbsp;
+							<img src="${pageContext.request.contextPath}/bank_img/icbc.bmp" align="middle"/>&nbsp;&nbsp;&nbsp;&nbsp;
 							<input type="radio" name="pd_FrpId" value="BOC-NET-B2C"/>中国银行
-							<img src="../bank_img/bc.bmp" align="middle"/>&nbsp;&nbsp;&nbsp;&nbsp;
+							<img src="${pageContext.request.contextPath}/bank_img/bc.bmp" align="middle"/>&nbsp;&nbsp;&nbsp;&nbsp;
 							<input type="radio" name="pd_FrpId" value="ABC-NET-B2C"/>农业银行
-							<img src="../bank_img/abc.bmp" align="middle"/>
+							<img src="${pageContext.request.contextPath}/bank_img/abc.bmp" align="middle"/>
 							<br/>
 							<input type="radio" name="pd_FrpId" value="BOCO-NET-B2C"/>交通银行
-							<img src="../bank_img/bcc.bmp" align="middle"/>&nbsp;&nbsp;&nbsp;&nbsp;
+							<img src="${pageContext.request.contextPath}/bank_img/bcc.bmp" align="middle"/>&nbsp;&nbsp;&nbsp;&nbsp;
 							<input type="radio" name="pd_FrpId" value="PINGANBANK-NET"/>平安银行
-							<img src="../bank_img/pingan.bmp" align="middle"/>&nbsp;&nbsp;&nbsp;&nbsp;
+							<img src="${pageContext.request.contextPath}/bank_img/pingan.bmp" align="middle"/>&nbsp;&nbsp;&nbsp;&nbsp;
 							<input type="radio" name="pd_FrpId" value="CCB-NET-B2C"/>建设银行
-							<img src="../bank_img/ccb.bmp" align="middle"/>
+							<img src="${pageContext.request.contextPath}/bank_img/ccb.bmp" align="middle"/>
 							<br/>
 							<input type="radio" name="pd_FrpId" value="CEB-NET-B2C"/>光大银行
-							<img src="../bank_img/guangda.bmp" align="middle"/>&nbsp;&nbsp;&nbsp;&nbsp;
+							<img src="${pageContext.request.contextPath}/bank_img/guangda.bmp" align="middle"/>&nbsp;&nbsp;&nbsp;&nbsp;
 							<input type="radio" name="pd_FrpId" value="CMBCHINA-NET-B2C"/>招商银行
-							<img src="../bank_img/cmb.bmp" align="middle"/>
+							<img src="${pageContext.request.contextPath}/bank_img/cmb.bmp" align="middle"/>
 						</p>
 						<hr />
 						<p style="text-align:right">
 							<a href="javascript:document.getElementById('orderForm').submit();">
-								<img src="../images/finalbutton.gif" width="204" height="51" border="0" />
+								<img src="${pageContext.request.contextPath}/images/finalbutton.gif" width="204" height="51" border="0" />
 							</a>
 						</p>
 				</div>

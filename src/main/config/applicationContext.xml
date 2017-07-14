@@ -47,6 +47,8 @@
                 <value>com/reige/store/product/Product.hbm.xml</value>
                 <value>com/reige/store/category/Category.hbm.xml</value>
                 <value>com/reige/store/categorysecond/CategorySecond_hbm.xml</value>
+                <value>com/reige/store/order/Order.hbm.xml</value>
+                <value>com/reige/store/order/OrderItem.hbm.xml</value>
             </list>
         </property>
     </bean>
@@ -76,6 +78,9 @@
     <bean id="cartAction" class="com.reige.store.cart.CartAction" scope="prototype">
         <property name="productService" ref="productService"/>
     </bean>
+    <bean id="orderAction" class="com.reige.store.order.OrderAction" scope="prototype">
+        <property name="orderService" ref="orderService"/>
+    </bean>
 
     <!--验证码Action-->
     <bean id="checkImgAction" class="com.reige.store.utils.CheckImgAction" scope="prototype"/>
@@ -91,6 +96,10 @@
     <bean id="categoryService" class="com.reige.store.category.CategoryService">
         <property name="categoryDao" ref="categoryDao"/>
     </bean>
+    <bean id="orderService" class="com.reige.store.order.OrderService">
+        <property name="orderDao" ref="orderDao"/>
+    </bean>
+
 
     <!--配置dao-->
     <!--用户-->
@@ -107,6 +116,9 @@
     </bean>
     <!--二级分类-->
     <bean id="categorySecondDao" class="com.reige.store.categorysecond.CategorySecondDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="orderDao" class="com.reige.store.order.OrderDao">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 

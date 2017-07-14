@@ -30,81 +30,17 @@
             <img src="${pageContext.request.contextPath}/image/header.jpg" width="320" height="50" alt="正品保障" title="正品保障">
         </div>
     </div>
-    <div class="span10 last">
-        <div class="topNav clearfix">
-            <ul>
-                <li id="headerLogin" class="headerLogin" style="display: list-item;">
-                    <a href="login.jsp">登录</a>|
-                </li>
-                <li id="headerRegister" class="headerRegister" style="display: list-item;">
-                    <a href="regist.jsp">注册</a>|
-                </li>
-                <li id="headerUsername" class="headerUsername"></li>
-                <li id="headerLogout" class="headerLogout">
-                    <a href="index.jsp">[退出]</a>|
-                </li>
-                <li>
-                    <a>会员中心</a>
-                    |
-                </li>
-                <li>
-                    <a>购物指南</a>
-                    |
-                </li>
-                <li>
-                    <a>关于我们</a>
-
-                </li>
-            </ul>
-        </div>
-        <div class="cart">
-            <a href="cart.jsp">购物车</a>
-        </div>
-        <div class="phone">
-            客服热线:
-            <strong>96008/53277764</strong>
-        </div>
-    </div>
-    <div class="span24">
-        <ul class="mainNav">
-            <li>
-                <a href="index.jsp">首页</a>
-                |
-            </li>
-            <li>
-                <a href="list.jsp">定制套餐</a>
-                |
-            </li>
-            <li>
-                <a>安全频道</a>
-                |
-            </li>
-            <li>
-                <a>亿家卡</a>
-                |
-            </li>
-            <li>
-                <a>蔬菜基地</a>
-                |
-            </li>
-            <li>
-                <a>节气养生</a>
-                |
-            </li>
-            <li>
-                <a>便民服务</a>
-                |
-            </li>
-
-        </ul>
-    </div>
-
+    <%@ include file="header.jsp" %>
+    <%@ include file="menu.jsp" %>
 </div>
 <div class="container cart">
     <div class="span24">
-        <div class="step step1">
-
-        </div>
+        <s:if test="#session.cart==null||#session.cart.cartItems.size()==0">
+            <div class="step step1">
+                您还没有购物!请先去购物!
+            </div>
+        </s:if>
+        <s:else>
         <table>
             <tbody>
             <tr>
@@ -115,33 +51,32 @@
                 <th>小计</th>
                 <th>操作</th>
             </tr>
+            <s:iterator var="c" value="#session.cart.cartItems">
             <tr>
                 <td width="60">
                     <input type="hidden" name="id" value="22">
-                    <img src="${pageContext.request.contextPath}/image/dadonggua.jpg">
+                    <img src="${pageContext.request.contextPath}/<s:property value="#c.product.image"/>">
                 </td>
                 <td>
-                    <a target="_blank"> 有机蔬菜 大冬瓜...</a>
+                    <a target="_blank"><s:property value="#c.product.pname"/></a>
                 </td>
                 <td>
-                    ￥298.00
+                    ￥<s:property value="#c.product.shop_price"/>
                 </td>
                 <td class="quantity" width="60">
-                    <input type="text" name="quantity" value="1" maxlength="4" onpaste="return false;">
-                    <div>
-                        <span class="increase">&nbsp;</span>
-                        <span class="decrease">&nbsp;</span>
-                    </div>
+                    <s:property value="#c.count"/>
                 </td>
                 <td width="140">
-                    <span class="subtotal">￥596.00</span>
+                    <span class="subtotal"><s:property value="#c.subtotal"/></span>
                 </td>
                 <td>
-                    <a href="javascript:;" class="delete">删除</a>
+                    <a href="${pageContext.request.contextPath}/cart_removeCart.action?pid=<s:property value="#c.product.pid"/> " class="delete">删除</a>
                 </td>
             </tr>
+            </s:iterator>
             </tbody>
         </table>
+
         <dl id="giftItems" class="hidden" style="display: none;">
         </dl>
         <div class="total">
@@ -149,13 +84,14 @@
             <em>
                 登录后确认是否享有优惠
             </em>
-            赠送积分: <em id="effectivePoint">596</em>
-            商品金额: <strong id="effectivePrice">￥596.00元</strong>
+            赠送积分: <em id="effectivePoint"><s:property value="#session.cart.total"/> </em>
+            商品金额: <strong id="effectivePrice">￥<s:property value="#session.cart.total"/>元</strong>
         </div>
         <div class="bottom">
-            <a href="javascript:;" id="clear" class="clear">清空购物车</a>
-            <a href="login.jsp" id="submit" class="submit">提交订单</a>
+            <a href="${pageContext.request.contextPath}/cart_clearCart.action" id="clear" class="clear">清空购物车</a>
+            <a href="${ pageContext.request.contextPath }/order_saveOrder.action" id="submit" class="submit">提交订单</a>
         </div>
+        </s:else>
     </div>
 </div>
 <div class="container footer">

@@ -29,7 +29,8 @@ public class Cart {
         Integer pid = cartItem.getProduct().getPid();
         if (map.containsKey(pid)){
             CartItem cartItem_temp = map.get(pid);
-            cartItem.setCount(cartItem_temp.getCount()+cartItem.getCount());
+            //直接修改了地址 不用再set
+            cartItem_temp.setCount(cartItem_temp.getCount()+cartItem.getCount());
         }else {
             map.put(pid,cartItem);
         }

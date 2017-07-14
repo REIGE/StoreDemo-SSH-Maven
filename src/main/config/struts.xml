@@ -38,5 +38,9 @@
             <result name="removeCartSuccess">/WEB-INF/jsp/cart.jsp</result>
             <result name="myCartSuccess">/WEB-INF/jsp/cart.jsp</result>
         </action>
+
+        <action name="order_*" class="orderAction" method="{1}">
+            <result name="saveOrderSuccess">/WEB-INF/jsp/order.jsp</result>
+        </action>
     </package>
 </struts>

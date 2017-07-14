@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.reige.store.order.Order" table="orders">
+        <id name="oid" column="oid">
+            <generator class="native"/>
+        </id>
+        <property name="total" column="total"/>
+        <property name="ordertime" column="ordertime"/>
+        <property name="state" column="state"/>
+        <property name="addr" column="addr"/>
+        <property name="phone" column="phone"/>
+        <property name="name" column="name"/>
+
+        <many-to-one name="user" class="com.reige.store.user.User" column="uid" lazy="false"/>
+
+        <set name="orderItems" cascade="save-update" lazy="false">
+            <key column="oid"/>
+            <one-to-many class="com.reige.store.order.OrderItem"/>
+        </set>
+    </class>
+</hibernate-mapping>
