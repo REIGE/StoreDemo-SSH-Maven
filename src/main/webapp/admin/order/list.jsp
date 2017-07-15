@@ -112,7 +112,6 @@
 											<a href="${ pageContext.request.contextPath }/order_adminFindAll.action?page=<s:property value="pageBean.totalPage"/>">尾页</a>
 										</s:if>
 									</td>
-									
 								</tr>
 							</table>
 						</td>

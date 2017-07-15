@@ -3,17 +3,17 @@
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="com.reige.store.category.Category">
-        <id name="cid" column="cid">
-            <generator class="native"/>
-        </id>
-        <!-- 配置普通属性 -->
-        <property name="cname" column="cname"/>
+<class name="com.reige.store.category.Category">
+    <id name="cid" column="cid">
+        <generator class="native"/>
+    </id>
+    <!-- 配置普通属性 -->
+    <property name="cname" column="cname"/>
 
-        <!-- 配置关联关系 -->
-        <set name="categorySecond" order-by="csid" lazy="false">
-            <key column="cid"/>
-            <one-to-many class="com.reige.store.categorysecond.CategorySecond"/>
-        </set>
-    </class>
+    <!-- 配置关联关系 -->
+    <set name="categorySecond" order-by="csid" lazy="false">
+        <key column="cid"/>
+        <one-to-many class="com.reige.store.categorysecond.CategorySecond"/>
+    </set>
+</class>
 </hibernate-mapping>

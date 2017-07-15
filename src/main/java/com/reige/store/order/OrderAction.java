@@ -1,9 +1,11 @@
 package com.reige.store.order;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.reige.store.cart.Cart;
 import com.reige.store.cart.CartItem;
 import com.reige.store.user.User;
+import com.reige.store.utils.PageBean;
 import org.apache.struts2.ServletActionContext;
 import org.aspectj.weaver.ast.Or;
 
@@ -18,6 +20,8 @@ public class OrderAction extends ActionSupport {
 
     private OrderService orderService;
     private Order order;
+    private Integer state;
+    private Integer page;
 
 
     public void setOrderService(OrderService orderService) {
@@ -30,6 +34,14 @@ public class OrderAction extends ActionSupport {
 
     public void setOrder(Order order) {
         this.order = order;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
     }
 
     public String saveOrder() {
@@ -76,5 +88,25 @@ public class OrderAction extends ActionSupport {
 
         orderService.update(currOrder);
         return NONE;
+    }
+
+    /**
+     * 后台按状态查询查询订单
+     */
+    public String adminFindByState() {
+        PageBean<Order> pageBean = orderService.findByPage(state, page);
+        // 将PageBean的数据保存到页面:
+        ActionContext.getContext().getValueStack().set("pageBean", pageBean);
+        return "adminFindByStateSuccess";
+    }
+
+    /**
+     * 后台查询所有订单
+     */
+    public String adminFindAll() {
+        PageBean<Order> pageBean = orderService.findByPage(page);
+        // 将PageBean的数据保存到页面:
+        ActionContext.getContext().getValueStack().set("pageBean", pageBean);
+        return "adminFindAllSuccess";
     }
 }
