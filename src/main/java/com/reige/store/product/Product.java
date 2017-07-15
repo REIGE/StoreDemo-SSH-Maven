@@ -2,7 +2,7 @@ package com.reige.store.product;
 
 import com.reige.store.categorysecond.CategorySecond;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * 商品的实体类.

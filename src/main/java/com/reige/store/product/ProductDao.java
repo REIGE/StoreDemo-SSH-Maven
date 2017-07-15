@@ -68,4 +68,27 @@ public class ProductDao extends HibernateDaoSupport {
         List list = getHibernateTemplate().find("from Product where pid = ?", pid);
         return (Product) list.get(0);
     }
+
+    public List<Product> findByPage(int begin, int limit) {
+        String hql = "from Product";
+        List<Product> list = this.getHibernateTemplate().executeFind(new PageHibernateCallback<Product>(hql, null, begin, limit));
+        if(list.size() > 0){
+            return list;
+        }
+        return null;
+    }
+
+    public void save(Product product) {
+        this.getHibernateTemplate().save(product);
+    }
+
+    public Integer findCount() {
+        String hql = "select count(*) from Product";
+        List<Long> list = this.getHibernateTemplate().find(hql);
+        if(list.size() > 0){
+            return list.get(0).intValue();
+        }
+        return null;
+    }
+
 }

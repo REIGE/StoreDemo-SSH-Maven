@@ -36,6 +36,10 @@
             <result name="findByCidSuccess">/WEB-INF/jsp/list.jsp</result>
             <result name="findByCsidSuccess">/WEB-INF/jsp/list.jsp</result>
             <result name="findByPidSuccess">/WEB-INF/jsp/desc.jsp</result>
+
+            <result name="adminFindAllSuccess">/admin/product/list.jsp</result>
+            <result name="addPageSuccess">/admin/product/add.jsp</result>
+            <result name="saveSuccess" type="redirectAction">product_adminFindAll.action?page=1</result>
         </action>
         
         <action name="cart_*" class="cartAction" method="{1}">

@@ -76,6 +76,7 @@
     <bean id="productAction" class="com.reige.store.product.ProductAction" scope="prototype">
         <property name="productService" ref="productService"/>
         <property name="categoryService" ref="categoryService"/>
+        <property name="categorySecondService" ref="categorySecondService"/>
     </bean>
     <bean id="cartAction" class="com.reige.store.cart.CartAction" scope="prototype">
         <property name="productService" ref="productService"/>
@@ -86,6 +87,7 @@
     <bean id="adminUserAction" class="com.reige.store.adminuser.AdminUserAction" scope="prototype">
         <property name="adminUserService" ref="adminUserService"/>
     </bean>
+
 
     <!--验证码Action-->
     <bean id="checkImgAction" class="com.reige.store.utils.CheckImgAction" scope="prototype"/>
@@ -106,6 +108,9 @@
     </bean>
     <bean id="adminUserService" class="com.reige.store.adminuser.AdminUserService">
         <property name="adminUserDao" ref="adminUserDao"/>
+    </bean>
+    <bean id="categorySecondService" class="com.reige.store.categorysecond.CategorySecondService">
+        <property name="categorySecondDao" ref="categorySecondDao"/>
     </bean>
 
 
