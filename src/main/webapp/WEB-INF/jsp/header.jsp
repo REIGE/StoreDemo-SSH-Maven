@@ -8,7 +8,7 @@
                     <s:property value="#session.existUser.name"/>|
                 </li>
                 <li id="headerRegister" class="headerRegister" style="display: list-item;">
-                    <a href="${pageContext.request.contextPath}/user_registPage.action">注册</a>|
+                    <a href="${pageContext.request.contextPath}/user_quit.action">退出</a>|
                 </li>
             </s:if>
             <s:else>
@@ -40,7 +40,7 @@
         </ul>
     </div>
     <div class="cart">
-        <a href="cart.jsp">购物车</a>
+        <a href="${pageContext.request.contextPath}/cart_myCart.action">购物车</a>
     </div>
     <div class="phone">
         客服热线:

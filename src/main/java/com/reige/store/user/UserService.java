@@ -1,10 +1,13 @@
 package com.reige.store.user;
 
 import com.reige.store.utils.UUIDUtils;
+import org.springframework.transaction.annotation.Transactional;
+
 
 /**
  * Created by REIGE on 2017/7/8.
  */
+@Transactional
 public class UserService {
     private UserDao userDao;
 

@@ -12,6 +12,7 @@
 	http://www.springframework.org/schema/tx
 	http://www.springframework.org/schema/tx/spring-tx.xsd">
 
+
     <!-- 引入外部jdbc.properties文件 -->
     <context:property-placeholder location="classpath:jdbc.properties"/>
 
@@ -49,6 +50,7 @@
                 <value>com/reige/store/categorysecond/CategorySecond_hbm.xml</value>
                 <value>com/reige/store/order/Order.hbm.xml</value>
                 <value>com/reige/store/order/OrderItem.hbm.xml</value>
+                <value>com/reige/store/adminuser/AdminUser.hbm.xml</value>
             </list>
         </property>
     </bean>
@@ -58,8 +60,8 @@
         <!--注入sessionFactory-->
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
-
     <tx:annotation-driven transaction-manager="transactionManager"/>
+    <!--<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>-->
 
     <!--配置action-->
     <bean id="indexAction" class="com.reige.store.index.IndexAction" scope="prototype">
@@ -81,6 +83,9 @@
     <bean id="orderAction" class="com.reige.store.order.OrderAction" scope="prototype">
         <property name="orderService" ref="orderService"/>
     </bean>
+    <bean id="adminUserAction" class="com.reige.store.adminuser.AdminUserAction" scope="prototype">
+        <property name="adminUserService" ref="adminUserService"/>
+    </bean>
 
     <!--验证码Action-->
     <bean id="checkImgAction" class="com.reige.store.utils.CheckImgAction" scope="prototype"/>
@@ -98,6 +103,9 @@
     </bean>
     <bean id="orderService" class="com.reige.store.order.OrderService">
         <property name="orderDao" ref="orderDao"/>
+    </bean>
+    <bean id="adminUserService" class="com.reige.store.adminuser.AdminUserService">
+        <property name="adminUserDao" ref="adminUserDao"/>
     </bean>
 
 
@@ -119,6 +127,10 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     <bean id="orderDao" class="com.reige.store.order.OrderDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="adminUserDao" class="com.reige.store.adminuser.AdminUserDao">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 

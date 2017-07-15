@@ -15,4 +15,11 @@ public class OrderService {
     }
 
 
+    public Order findByOid(Integer oid) {
+        return null;
+    }
+
+    public void update(Order currOrder) {
+
+    }
 }

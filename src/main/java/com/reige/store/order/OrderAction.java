@@ -5,6 +5,7 @@ import com.reige.store.cart.Cart;
 import com.reige.store.cart.CartItem;
 import com.reige.store.user.User;
 import org.apache.struts2.ServletActionContext;
+import org.aspectj.weaver.ast.Or;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -33,7 +34,7 @@ public class OrderAction extends ActionSupport {
 
     public String saveOrder() {
         order = new Order();
-//        order.setOrdertime(new Date());
+        order.setOrdertime(new Date());
         order.setState(1);//1 未付款 2已付款 3已经发货 4已经收货
         HttpServletRequest request = ServletActionContext.getRequest();
         Cart cart = (Cart) request.getSession().getAttribute("cart");
@@ -59,13 +60,21 @@ public class OrderAction extends ActionSupport {
         }
         //清空购物车
         cart.clearCart();
-        System.out.println(order.toString());
 
         //保存订单
         Integer oid = orderService.save(order);
         order.setOid(oid);
 
         return "saveOrderSuccess";
+    }
 
+    public String payOrder(){
+        Order currOrder = orderService.findByOid(order.getOid());
+        currOrder.setAddr(order.getAddr());
+        currOrder.setName(order.getName());
+        currOrder.setPhone(order.getPhone());
+
+        orderService.update(currOrder);
+        return NONE;
     }
 }
